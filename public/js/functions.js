@@ -10,8 +10,8 @@ function div_exchange_click(exchange) {
                         throw new ServerException(message, stackTrace);
                     });
             } else {
-                //return response.json();
-                window.location.replace(url);
+                return response.json();
+                //window.location.replace(url);
             }
         });
 }
