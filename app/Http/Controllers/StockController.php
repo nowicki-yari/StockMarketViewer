@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use App\Models\Exchange;
 use App\Models\Stock;
 
@@ -14,7 +15,8 @@ class StockController extends Controller
         return view("stocks")->with("stocks",$allStocks)->with('exchange', $exchange);
     }
 
-    public function info($stock) {
-        return $stock;
+    public function getInfo($exchange, $stock) {
+        $data = Http::get("http://127.0.0.1:5000/stock/" . $stock . "/info")->json();
+        return view("stock_overview")->with('exchange', $exchange)->with('info', json_decode($data, true));
     }
 }
