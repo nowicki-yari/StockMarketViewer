@@ -16,6 +16,23 @@ function div_exchange_click(exchange) {
         });
 }
 
+function div_stock_click(stock) {
+    var url = 'stock/' + stock.symbol + '/' + 'info'
+    fetch(url)
+        .then(response => {
+            if (response.status === 500) {
+                return response.json() // return the result of the inner promise, which is an error
+                    .then((json) => {
+                        const { message, stackTrace } = json;
+                        throw new ServerException(message, stackTrace);
+                    });
+            } else {
+                return response.json();
+                //window.location.replace(url);
+            }
+        });
+}
+
 function filter_stocks() {
     var input, filter, ul, li, a, i, txtValue;
     input = document.getElementById("myInput");
