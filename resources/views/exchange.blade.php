@@ -6,10 +6,11 @@
     <div id="exchange_list">
         @foreach($exchanges as $e)
             @csrf
-            <div id="exchange" onclick="div_exchange_click({{$e}})">
+            <div id="exchange">
                 <b>{{$e->name}}</b>
                 <br>
                 <p>{{$e->country}}</p>
+                <button onclick="location.href='{{ url('/exchanges/' . $e->short_name . '/stocks') }}'">View stocks</button>
             </div>
         @endforeach
     </div>

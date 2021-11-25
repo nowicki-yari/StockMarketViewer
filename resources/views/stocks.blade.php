@@ -5,7 +5,7 @@
 @section('content')
     <div id="stock_list">
         @foreach($stocks as $s)
-            <div id="stock" onclick="div_stock_click({{$s}})">
+            <div id="stock" onclick="div_stock_click({{$s, $exchange}})">
                 <b>{{$s->name}}</b>
                 <br>
                 <p>{{$s->symbol}}</p>

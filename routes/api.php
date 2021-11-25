@@ -18,4 +18,6 @@ use App\Http\Controllers\StockController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('/exchanges/{exchange}/stocks', [StockController::class, "getStocksFromExchange"]);
+Route::get('https://python-stock-api.herokuapp.com/stock/{stock}/info', function ($stock) {
+    return $stock;
+});

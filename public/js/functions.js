@@ -1,6 +1,5 @@
-function div_exchange_click(exchange) {
-    console.log(exchange);
-    var url = 'api/exchanges/' + exchange.short_name + '/' + 'stocks'
+function div_stock_click(stock, exchange) {
+    var url = 'https://python-stock-api.herokuapp.com/stock/' + stock.symbol + '/info'
     fetch(url)
         .then(response => {
             if (response.status === 500) {
@@ -10,25 +9,7 @@ function div_exchange_click(exchange) {
                         throw new ServerException(message, stackTrace);
                     });
             } else {
-                return response.json();
-                //window.location.replace(url);
-            }
-        });
-}
-
-function div_stock_click(stock) {
-    var url = 'stock/' + stock.symbol + '/' + 'info'
-    fetch(url)
-        .then(response => {
-            if (response.status === 500) {
-                return response.json() // return the result of the inner promise, which is an error
-                    .then((json) => {
-                        const { message, stackTrace } = json;
-                        throw new ServerException(message, stackTrace);
-                    });
-            } else {
-                return response.json();
-                //window.location.replace(url);
+                location.href = '/exchanges/' + exchange + '/stocks/' + stock.symbol + '/info';
             }
         });
 }

@@ -13,4 +13,8 @@ class StockController extends Controller
             ->where('exchange','==', $exchange);
         return view("stocks")->with("stocks",$allStocks)->with('exchange', $exchange);
     }
+
+    public function info($stock) {
+        return $stock;
+    }
 }

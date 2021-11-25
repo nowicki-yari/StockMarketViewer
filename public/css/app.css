@@ -13,7 +13,7 @@ body {
   'menu main right'
   'footer footer footer';
     grid-template-columns: 10% 80% 10%;
-    grid-template-rows: 10% 85% 5%;
+    grid-template-rows: 13% 80% 7%;
     background-color: #2196F3;
 }
 
@@ -70,4 +70,11 @@ body {
     margin: 20px;
 }
 
+#stock {
+    border-radius: 25px;
+    border: 2px solid;
+    padding: 20px;
+    width: 80%;
+    margin: 5px;
+}
 
