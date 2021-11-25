@@ -1,3 +1,5 @@
+
+
 function div_stock_click(stock, exchange) {
     var url = 'https://python-stock-api.herokuapp.com/stock/' + stock.symbol + '/info'
     fetch(url)
@@ -12,6 +14,10 @@ function div_stock_click(stock, exchange) {
                 location.href = '/exchanges/' + exchange + '/stocks/' + stock.symbol + '/info';
             }
         });
+}
+
+function history_graph() {
+
 }
 
 function filter_stocks() {
