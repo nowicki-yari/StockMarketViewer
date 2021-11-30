@@ -5,7 +5,7 @@
 @section('content')
     <script>
         window.onload = function () {
-            $.getJSON('http://127.0.0.1:5000/stock/{{$info[0]['symbol'] }}/history/2020-09-04/2021-01-08', function(data) {
+            $.getJSON('http://127.0.0.1:5000/stock/{{$info[0]['symbol'] }}/history/2020-09-04', function(data) {
                 let graph_data = JSON.parse(data);
                 let d = [];
                 let labels = [];
