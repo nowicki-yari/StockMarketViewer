@@ -84,6 +84,7 @@ body {
 
 .navbar div {
     float: left;
+    justify-content: space-between;
     font-size: 16px;
     color: white;
     text-align: center;
