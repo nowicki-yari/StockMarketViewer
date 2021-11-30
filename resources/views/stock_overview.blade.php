@@ -5,7 +5,7 @@
 @section('content')
     <script>
         window.onload = function () {
-            fetch('http://127.0.0.1:5000/stock/{{$info[0]['symbol'] }}/history/2020-09-04')
+            fetch('http://127.0.0.1:5000/stock/{{$info[0]['symbol'] }}/history')
             .then(response => response.json())
             .then(data => {
                 let graph_data = JSON.parse(data);
@@ -26,16 +26,15 @@
                             data: d,
                             borderColor: 'rgba(0,0,0,1)',
                             backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                            borderWidth: 1,
+                            borderWidth: 1
                         }]
                     },
                     options: {
                         scales: {
-                            xAxis: [{
-                                type: 'time',
+                            xAxes: [{
                                 ticks: {
                                     autoSkip: true,
-                                    maxTicksLimit: 5
+                                    maxTicksLimit: 10
                                 }
                             }],
                             yAxes: [{
