@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Exchange;
 use Illuminate\Http\Request;
+use Artisaninweb\SoapWrapper\SoapWrapper;
 
 class ExchangeController extends Controller
 {
@@ -14,8 +15,19 @@ class ExchangeController extends Controller
      */
     public function index()
     {
+        /*
         $allExchanges= Exchange::all();
         return view("exchange")->with("exchanges",$allExchanges);
+        */
+        $soapWrapper = new SoapWrapper();
+        $soapWrapper->add('ExchangeList', function ($service) {
+           $service
+           ->wsdl('http://localhost:53278/Exchanges.asmx?WSDL')
+           ->trace(true)
+           ->classmap([
+               Exchange::class
+           ]);
+        });
     }
 
     /**
