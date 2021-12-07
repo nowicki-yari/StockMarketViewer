@@ -92,4 +92,21 @@ body {
     text-decoration: none;
 }
 
+.center {
+    display:inline-block;
+    margin: 7px;
+    width: 10%;
+    background-color: #44a4ee;
+    color: #f7fafc;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.center:hover {
+    background-color: black;
+}
+
+#date_div {
+    text-align:center;
+}
 
