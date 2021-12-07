@@ -8,6 +8,14 @@ use Artisaninweb\SoapWrapper\SoapWrapper;
 
 class ExchangeController extends Controller
 {
+    protected $soapWrapper;
+
+    public function __construct(SoapWrapper $soapWrapper)
+    {
+        $this->soapWrapper = $soapWrapper;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -22,12 +30,17 @@ class ExchangeController extends Controller
         $soapWrapper = new SoapWrapper();
         $soapWrapper->add('ExchangeList', function ($service) {
            $service
-           ->wsdl('http://localhost:53278/Exchanges.asmx?WSDL')
+           ->wsdl('https://stockmarketviewer.azurewebsites.net/Exchanges.asmx?WSDL')
            ->trace(true)
            ->classmap([
                Exchange::class
            ]);
         });
+
+        $response = $soapWrapper->call('ExchangeList.GetExchanges', [
+            new Exchange()
+        ]);
+        return view("exchange")->with("exchanges", $response->GetExchangesResult->Exchange);
     }
 
     /**

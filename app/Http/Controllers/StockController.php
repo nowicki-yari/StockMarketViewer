@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Models\Exchange;
 use App\Models\Stock;
+use Artisaninweb\SoapWrapper\SoapWrapper;
 
 class StockController extends Controller
 {
+
     public function getStocksFromExchange($exchange) {
         $allStocks= Stock::all()
             ->where('exchange','==', $exchange);
