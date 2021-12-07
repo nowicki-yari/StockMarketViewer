@@ -13,41 +13,33 @@
                 let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
                 let yyyy = today.getFullYear();
                 let today_string = yyyy + '-' + mm + '-' + dd;
+                min_date = new Date();
                 switch (range) {
                     case 1:
-                        min_date = new Date();
                         min_date.setDate(today.getDate() - 7);
                         break;
                     case 2:
-                        min_date = new Date();
                         min_date.setDate(today.getDate() - 14);
                         break;
                     case 3:
-                        min_date = new Date();
                         min_date.setMonth(today.getMonth() - 1);
                         break;
                     case 4:
-                        min_date = new Date();
                         min_date.setMonth(today.getMonth() - 3);
                         break;
                     case 5:
-                        min_date = new Date();
                         min_date.setMonth(today.getMonth() - 6);
                         break;
                     case 6:
-                        min_date = new Date();
                         min_date.setFullYear(today.getFullYear() - 1);
                         break;
                     case 7:
-                        min_date = new Date();
                         min_date.setFullYear(today.getFullYear() - 3);
                         break;
                     case 8:
-                        min_date = new Date();
                         min_date.setFullYear(today.getFullYear() - 50);
                         break;
                 }
-                console.log(min_date);
                 dd = String(min_date.getDate()).padStart(2, '0');
                 mm = String(min_date.getMonth() + 1).padStart(2, '0'); //January is 0!
                 yyyy = min_date.getFullYear();
