@@ -37,10 +37,16 @@ class ExchangeController extends Controller
            ]);
         });
 
-        $response = $soapWrapper->call('ExchangeList.GetExchanges', [
+        $exchanges = $soapWrapper->call('ExchangeList.GetExchanges', [
             new Exchange()
         ]);
-        return view("exchange")->with("exchanges", $response->GetExchangesResult->Exchange);
+
+        $sectors = $soapWrapper->call('ExchangeList.GetListOfSectors', []);
+        $array = json_decode(json_encode($sectors), true);
+        $numeric_indexed_array = array_values($array['GetListOfSectorsResult']);
+        return view("exchange")
+            ->with("exchanges", $exchanges->GetExchangesResult->Exchange)
+            ->with("sectors", $sectors->GetListOfSectorsResult->string);
     }
 
     /**
