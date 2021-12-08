@@ -4,9 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Exchange;
 use Illuminate\Http\Request;
+use Artisaninweb\SoapWrapper\SoapWrapper;
 
 class ExchangeController extends Controller
 {
+    protected $soapWrapper;
+
+    public function __construct(SoapWrapper $soapWrapper)
+    {
+        $this->soapWrapper = $soapWrapper;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -14,8 +23,30 @@ class ExchangeController extends Controller
      */
     public function index()
     {
+        /*
         $allExchanges= Exchange::all();
         return view("exchange")->with("exchanges",$allExchanges);
+        */
+        $soapWrapper = new SoapWrapper();
+        $soapWrapper->add('ExchangeList', function ($service) {
+           $service
+           ->wsdl('https://stockmarketviewer.azurewebsites.net/Exchanges.asmx?WSDL')
+           ->trace(true)
+           ->classmap([
+               Exchange::class
+           ]);
+        });
+
+        $exchanges = $soapWrapper->call('ExchangeList.GetExchanges', [
+            new Exchange()
+        ]);
+
+        $sectors = $soapWrapper->call('ExchangeList.GetListOfSectors', []);
+        $array = json_decode(json_encode($sectors), true);
+        $numeric_indexed_array = array_values($array['GetListOfSectorsResult']);
+        return view("exchange")
+            ->with("exchanges", $exchanges->GetExchangesResult->Exchange)
+            ->with("sectors", $sectors->GetListOfSectorsResult->string);
     }
 
     /**

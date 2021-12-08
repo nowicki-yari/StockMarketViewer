@@ -5,14 +5,33 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class Exchange extends Model
 {
     use HasFactory;
 
+
+    private $Id;
     private $name;
     private $short_name;
     private $country;
     private $currency;
+
+    /**
+     * @param mixed $Id
+     */
+    public function setId($Id): void
+    {
+        $this->Id = $Id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->Id;
+    }
 
     /**
      * @param mixed $name

@@ -5,16 +5,39 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class Stock extends Model
 {
     use HasFactory;
 
+    private $Id;
     private $name;
     private $symbol;
     private $exchange;
     private $country;
     private $sector;
     private $industry;
+
+    public function __construct($exchange)
+    {
+        $this->exchange = $exchange;
+    }
+
+    /**
+     * @param mixed $Id
+     */
+    public function setId($Id): void
+    {
+        $this->Id = $Id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->Id;
+    }
 
     /**
      * @param mixed $name

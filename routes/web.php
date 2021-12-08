@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\ExchangeController;
+use \App\Http\Controllers\IndustryController;
 use \App\Http\Controllers\StockController;
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,7 @@ use \App\Http\Controllers\StockController;
 Route::get('/', [ExchangeController::class, 'index']);
 Route::get('/exchanges/{exchange}/stocks', [StockController::class, "getStocksFromExchange"]);
 Route::get('/exchanges/{exchange}/stocks/{stock}/info', [StockController::class, "getInfo"]);
+Route::get('/sector/{sector}/industries', [IndustryController::class, "getIndustriesFromSector"]);
+Route::get('/sector/{sector}/industries/{industry}/stocks', [StockController::class, "getStocksFromIndustry"]);
+Route::get('/sector/{sector}/industries/{industry}/stocks/info', [StockController::class, "getInfo"]);
+
