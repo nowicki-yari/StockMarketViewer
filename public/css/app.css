@@ -12,7 +12,7 @@ body {
   'header header header'
   'menu main right'
   'footer footer footer';
-    grid-template-columns: 14% 76% 10%;
+    grid-template-columns: 14% 70% 16%;
     grid-template-rows: 12% 81% 7%;
     background-color: #2196F3;
 }
@@ -21,14 +21,14 @@ body {
 .item1 {
     grid-area: header;
     width: 100%;
-    background-color: beige;
+    background-color: #ababab;
     text-align: center;
 }
 /*Navigation*/
 .item2 {
     grid-area: menu;
     text-align: center;
-    background-color: #a0aec0;
+    background-color: #707788;
 }
 /*MAIN*/
 .item3 {
@@ -41,14 +41,16 @@ body {
 /*Right*/
 .item4 {
     grid-area: right;
-    background-color: goldenrod;
+    background-color: #e8e8e8;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 /*Footer*/
 .item5 {
     grid-area: footer;
     width: 100%;
-    background-color: #6b7280;
+    background-color: #434d5b;
     text-align: center;
 }
 
@@ -108,5 +110,40 @@ body {
 
 #date_div {
     text-align:center;
+}
+
+/* TWITTER */
+blockquote.twitter-tweet {
+    display: inline-block;
+    font-family: "Helvetica Neue", Roboto, "Segoe UI", Calibri, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 16px;
+    border-color: #eee #ddd #bbb;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    margin: 10px 5px;
+    padding: 0 16px 16px 16px;
+    max-width: 468px;
+}
+
+blockquote.twitter-tweet p {
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 20px;
+}
+
+blockquote.twitter-tweet a {
+    color: inherit;
+    font-weight: normal;
+    text-decoration: none;
+    outline: 0 none;
+}
+
+blockquote.twitter-tweet a:hover,
+blockquote.twitter-tweet a:focus {
+    text-decoration: underline;
 }
 

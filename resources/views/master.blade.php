@@ -27,7 +27,9 @@
         </div>
         <div class="item3">@yield('content')</div>
         <div class="item4">
-            <h3>Select </h3>
+            <h3 style="text-align: center">Latest tweets from Bloomberg</h3>
+            <hr>
+            @include('tweets')
         </div>
         <div class="item5">
             <h5>Stock viewer</h5>
