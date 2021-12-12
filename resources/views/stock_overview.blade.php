@@ -96,47 +96,9 @@
         window.onload = function (){
             load_graph();
         }
-    </script>
-    <script>
-        function showInfo() {
-            document.getElementById("sub_info").style.display = "block"
-            document.getElementById("sub_dividends").style.display = "none"
-            document.getElementById("sub_financials").style.display = "none"
-            document.getElementById("sub_institutional_holders").style.display = "none"
-            document.getElementById("sub_recommendations").style.display = "none"
-        }
-        function showDividends() {
-            document.getElementById("sub_info").style.display = "none"
-            document.getElementById("sub_dividends").style.display = "block"
-            document.getElementById("sub_financials").style.display = "none"
-            document.getElementById("sub_institutional_holders").style.display = "none"
-            document.getElementById("sub_recommendations").style.display = "none"
-        }
-        function showFinancials() {
-            document.getElementById("sub_info").style.display = "none"
-            document.getElementById("sub_dividends").style.display = "none"
-            document.getElementById("sub_financials").style.display = "block"
-            document.getElementById("sub_institutional_holders").style.display = "none"
-            document.getElementById("sub_recommendations").style.display = "none"
-        }
-        function showHolders() {
-            document.getElementById("sub_info").style.display = "none"
-            document.getElementById("sub_dividends").style.display = "none"
-            document.getElementById("sub_financials").style.display = "none"
-            document.getElementById("sub_institutional_holders").style.display = "block"
-            document.getElementById("sub_recommendations").style.display = "none"
-        }
-        function showRecommendations() {
-            document.getElementById("sub_info").style.display = "none"
-            document.getElementById("sub_dividends").style.display = "none"
-            document.getElementById("sub_financials").style.display = "none"
-            document.getElementById("sub_institutional_holders").style.display = "none"
-            document.getElementById("sub_recommendations").style.display = "block"
-        }
         window.addEventListener("load", function () {
             showInfo();
         });
-
     </script>
     <h1 style="text-align: center">{{$info[0]['longName']}}</h1>
     <hr>
