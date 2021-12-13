@@ -6,8 +6,7 @@
     <div id="exchange_list">
         @foreach($industries as $i)
             @csrf
-            <div>
-                <hr>
+            <div class="exchange">
                 <a href="{{url("/sector/" . $sector . "/industries/" . $i . "/stocks")}}">{{$i}}</a>
                 <br>
             </div>

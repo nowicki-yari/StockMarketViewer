@@ -21,14 +21,14 @@
         </div>
         <div class="item2">
             <h2>Navigation menu</h2>
-            <input type="text" id="myInput" onkeyup="filter_stocks()" placeholder="Search for names.." title="Type in a name">
+            @yield('input_filter')
+            <h3>User stuff</h3>
             <hr>
             @yield('navigation')
         </div>
         <div class="item3">@yield('content')</div>
         <div class="item4">
-            <h3 style="text-align: center">Latest tweets from Bloomberg</h3>
-            <hr>
+            <h3>Latest tweets from Bloomberg</h3>
             @include('tweets')
         </div>
         <div class="item5">

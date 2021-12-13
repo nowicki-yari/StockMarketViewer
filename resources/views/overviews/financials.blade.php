@@ -4,6 +4,7 @@
         .then(response => response.json())
         .then(data => {
             let financials = JSON.parse(data);
+            console.log(financials);
             document.getElementById("financials").innerText = "" +
                 "Cost of revenue: " + financials["Cost Of Revenue"] + "\n" +
                 "Net Income: " + financials["Net Income"];

@@ -6,7 +6,7 @@
     <div id="exchange_list">
         @foreach($exchanges as $e)
             @csrf
-            <div id="exchange">
+            <div id="exchange" class="exchange">
                 <b>{{$e->Name}}</b>
                 <br>
                 <p>{{$e->ShortName}}</p>
@@ -17,8 +17,10 @@
 @stop
 
 @section('navigation')
+    <h3>Sectors</h3>
+    <hr>
     @foreach($sectors as $s)
-        <div>
+        <div class="sectors">
             <a href="{{url('/sector/' . $s . '/industries')}}">{{$s}}</a>
         </div>
     @endforeach

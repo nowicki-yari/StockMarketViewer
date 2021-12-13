@@ -4,7 +4,8 @@
         .then(response => response.json())
         .then(data => {
             let recommendations = JSON.parse(data);
-            document.getElementById("recommendations").innerText = "The latest recommendation is from " +
+            console.log(recommendations);
+            document.getElementById("recommendations").innerText = "The latest analysis is from " +
                 recommendations['Firm'][0] + ": \n\n" +
                 recommendations['To Grade'][0];
         })

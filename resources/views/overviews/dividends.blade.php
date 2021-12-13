@@ -4,11 +4,21 @@
             .then(response => response.json())
             .then(data => {
                 let dividends = JSON.parse(data);
-                document.getElementById("dividends").innerText = "Dividends from the last year: $" + dividends['Dividends'][0];
+                console.log(dividends);
+                if (dividends['Dividends'][0]){
+                    document.getElementById("dividends").innerText = "Last payed out dividends: $" + dividends['Dividends'][0];
+                } else {
+                    document.getElementById("dividends").innerText = "No information available"
+                }
             })
             .catch(console.error);
     });
+
+
 </script>
 <div id="dividends">
+    <table id="table">
+
+    </table>
 </div>
 

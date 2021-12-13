@@ -4,6 +4,10 @@ body {
     margin: 0;
 }
 
+h3 {
+    text-align: center;
+}
+
 .grid-container {
     width: 100vw;
     height: 100vh;
@@ -28,7 +32,7 @@ body {
 .item2 {
     grid-area: menu;
     text-align: center;
-    background-color: #707788;
+    background-color: #e8e8e8;
 }
 /*MAIN*/
 .item3 {
@@ -62,7 +66,7 @@ body {
 
 }
 
-#exchange {
+.exchange {
     border-radius: 25px;
     border: 2px solid #1a202c;
     padding: 20px;
@@ -92,6 +96,14 @@ body {
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+}
+
+.sectors {
+    font-size: larger;
+    text-align: center;
+    color: #1a202c;
+    text-decoration: none;
+    margin: 10px;
 }
 
 .center {
