@@ -116,6 +116,21 @@
         </div>
     </div>
     <div style="float: left; width: 48%;" >
+        @if($user->favorite_1 != $info[0]['symbol'] && $user->favorite_2 != $info[0]['symbol'] && $user->favorite_3 != $info[0]['symbol'] &&  $user->favorite_4 != $info[0]['symbol'] && $user->favorite_5 != $info[0]['symbol'])
+            <form style="float: right" action="/favorites/add">
+                <input type="text" name="symbol" value="{{$info[0]['symbol']}}" style="visibility: collapse">
+                <button type="submit" id="btn_favorites"> Mark as favorite</button>
+            </form>
+        @else
+            <form style="float: right" action="/favorites/remove">
+                <input type="text" name="symbol" value="{{$info[0]['symbol']}}" style="visibility: collapse">
+                <button type="submit" id="btn_favorite_delete"> Remove as favorite</button>
+            </form>
+        @endif
+        @if($errors->any())
+            <h4>{{$errors->first()}}</h4>
+        @endif
+        <br><br>
         <div class="navbar">
             <div onclick="showInfo()">Info</div>
             <div onclick="showDividends()">Dividends</div>

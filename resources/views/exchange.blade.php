@@ -9,7 +9,6 @@
             <div id="exchange" class="exchange">
                 <b>{{$e->Name}}</b>
                 <br>
-                <p>{{$e->ShortName}}</p>
                 <button onclick="location.href='{{ url('/exchanges/' . $e->ShortName . '/stocks') }}'">View stocks</button>
             </div>
         @endforeach

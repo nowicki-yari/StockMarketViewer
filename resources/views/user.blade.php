@@ -4,7 +4,7 @@
     <p >Favorite stocks:</p>
     @foreach($favorites as $s)
         @isset($s->Exchange)
-            <a href="{{url('/exchanges/' . $s->Exchange . '/stocks/' . $s->Symbol . '/info')}}">{{$s->Name}}</a>
+            <a href="{{url('/exchanges/' . $s->Exchange . '/stocks/' . $s->Symbol . '/info')}}" style="font-size: larger">{{$s->Name}}</a>
             <br>
         @endisset
     @endforeach

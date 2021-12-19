@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use \App\Http\Controllers\ExchangeController;
 use \App\Http\Controllers\IndustryController;
 use \App\Http\Controllers\StockController;
-
+use \App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,3 +23,5 @@ Route::get('/exchanges/{exchange}/stocks/{stock}/info', [StockController::class,
 Route::get('/sector/{sector}/industries', [IndustryController::class, "getIndustriesFromSector"]);
 Route::get('/sector/{sector}/industries/{industry}/stocks', [StockController::class, "getStocksFromIndustry"]);
 Route::get('/sector/{sector}/industries/{industry}/stocks/info', [StockController::class, "getInfo"]);
+Route::get('favorites/add', [UserController::class, "updateFavorites"]);
+Route::get('favorites/remove/', [UserController::class, "removeFavorite"]);

@@ -54,8 +54,14 @@ h3 {
 .item5 {
     grid-area: footer;
     width: 100%;
-    background-color: #434d5b;
+    background-color: #2d2d2d;
     text-align: center;
+    color: white;
+}
+
+.item5 a {
+    font-size: large;
+    margin: 20px;
 }
 
 #myInput {
@@ -69,11 +75,19 @@ h3 {
 .exchange {
     border-radius: 25px;
     border: 2px solid #1a202c;
-    padding: 20px;
     width: 200px;
     height: 150px;
     float: left;
+    font-size: larger;
     margin: 20px;
+    text-align: center;
+    padding: 50px 0;
+}
+
+.exchange a {
+    color: black;
+    text-align: center;
+
 }
 
 #stock {

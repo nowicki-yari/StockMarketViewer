@@ -73,3 +73,10 @@ function loadTweets() {
         })
         .catch(console.error);
 }
+
+function buttonEnableOrDisable(symbol, user) {
+    const button = document.getElementById("btn_favorites");
+    console.log(symbol);
+    console.log(user);
+
+}
