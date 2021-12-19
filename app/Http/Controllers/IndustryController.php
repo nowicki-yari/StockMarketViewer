@@ -18,16 +18,9 @@ class IndustryController extends Controller
     }
 
     public function getIndustriesFromSector($sector) {
-        $user = "";
-        $fav = [];
-        if (session()->has('favorites')) {
-            $fav = session('favorites');
-        }
-        if (session()->has('user')) {
-            $user = session('user');
-        }
+        //Gets session data if it exists
+        [$user, $fav] = $this->retrieve_session_data();
 
-        $data = ['sector' => $sector];
         $soapWrapper = new SoapWrapper();
         $soapWrapper->add('IndustryListFromSector', function ($service) {
             $service
@@ -38,9 +31,11 @@ class IndustryController extends Controller
                 ]);
         });
 
+        $data = ['sector' => $sector];
         $response = $soapWrapper->call('IndustryListFromSector.GetListOfIndustriesFromSector', [
             $data
         ]);
+
         return view("industries")
             ->with("industries",$response->GetListOfIndustriesFromSectorResult->string)
             ->with("sector", $sector)
@@ -48,14 +43,16 @@ class IndustryController extends Controller
             ->with("user", $user);
     }
 
-    public function prepare_input_favorites($user): string
+    public function retrieve_session_data(): array
     {
-        return implode(",", array_filter([
-            $user->favorite_1,
-            $user->favorite_2,
-            $user->favorite_3,
-            $user->favorite_4,
-            $user->favorite_5
-        ]));
+        $user = "";
+        $fav = [];
+        if (session()->has('favorites')) {
+            $fav = session('favorites');
+        }
+        if (session()->has('user')) {
+            $user = session('user');
+        }
+        return [$user, $fav];
     }
 }

@@ -28,7 +28,12 @@ class ExchangeController extends Controller
      */
     public function index()
     {
+        //Gets user that is loged in + their favorite stocks (as input for soap call)
         $user = Auth::user();
+        $data = ['stocks' => $this->prepare_input_favorites($user)];
+        $fav = [];
+
+        //Get list of exchanges
         $soapWrapper = new SoapWrapper();
         $soapWrapper->add('ExchangeList', function ($service) {
            $service
@@ -38,17 +43,11 @@ class ExchangeController extends Controller
                Exchange::class
            ]);
         });
-        $data = ['stocks' => $this->prepare_input_favorites($user)];
 
-        $favorites = $soapWrapper->call('ExchangeList.GetStocks', [
-            $data
-        ]);
-
-        $exchanges = $soapWrapper->call('ExchangeList.GetExchanges', [
-            new Exchange()
-        ]);
+        $favorites = $soapWrapper->call('ExchangeList.GetStocks', [$data]);
+        $exchanges = $soapWrapper->call('ExchangeList.GetExchanges', [new Exchange()]);
         $sectors = $soapWrapper->call('ExchangeList.GetListOfSectors', []);
-        $fav = [];
+
         if((array) $favorites != null) {
             if (gettype($favorites->GetStocksResult->Stock) == 'object') {
                 $fav = [$favorites->GetStocksResult->Stock];
@@ -56,6 +55,7 @@ class ExchangeController extends Controller
                 $fav = $favorites->GetStocksResult->Stock;
             }
         }
+
         session()->put('favorites', $fav);
         session()->put('user', $user);
 
@@ -64,88 +64,6 @@ class ExchangeController extends Controller
             ->with("sectors", $sectors->GetListOfSectorsResult->string)
             ->with("user", $user)
             ->with("favorites", $fav);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Show the form for entering a price range.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function zoek()
-    {
-        //return view("zoekLaptop");
-    }
-
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-
-    }
-    /****** in klasse Merk *****
-    public function verkoper() {
-    return $this->belongsTo(
-    'App\Models\Verkoper');
-    }
-     ****************/
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 
     public function prepare_input_favorites($user): string

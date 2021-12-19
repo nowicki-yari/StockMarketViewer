@@ -19,8 +19,9 @@ class StockController extends Controller
     }
 
     public function getStocksFromExchange($exchange) {
+        //Gets session data if it exists
         [$user, $fav] = $this->retrieve_session_data();
-        $data = ['exchange' => $exchange];
+
         $soapWrapper = new SoapWrapper();
         $soapWrapper->add('StockListFromExchange', function ($service) {
             $service
@@ -31,9 +32,9 @@ class StockController extends Controller
                 ]);
         });
 
-        $response = $soapWrapper->call('StockListFromExchange.GetStocksFromExchange', [
-            $data
-        ]);
+        $data = ['exchange' => $exchange];
+        $response = $soapWrapper->call('StockListFromExchange.GetStocksFromExchange', [$data]);
+
         return view("stocks")
             ->with("stocks",$response->GetStocksFromExchangeResult->Stock)
             ->with('exchange', $exchange)
@@ -42,7 +43,7 @@ class StockController extends Controller
     }
 
     public function getStocksFromIndustry($sector, $industry) {
-        $data = ['industry' => $industry];
+        //Gets session data if it exists
         [$user, $fav] = $this->retrieve_session_data();
         $soapWrapper = new SoapWrapper();
         $soapWrapper->add('StockListFromIndustry', function ($service) {
@@ -54,9 +55,9 @@ class StockController extends Controller
                 ]);
         });
 
-        $response = $soapWrapper->call('StockListFromIndustry.GetStocksFromIndustry', [
-            $data
-        ]);
+        $data = ['industry' => $industry];
+        $response = $soapWrapper->call('StockListFromIndustry.GetStocksFromIndustry', [$data]);
+
         return view("stocks")
             ->with("stocks",$response->GetStocksFromIndustryResult->Stock)
             ->with('industry', $industry)
