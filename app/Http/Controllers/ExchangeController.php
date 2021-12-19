@@ -16,6 +16,7 @@ class ExchangeController extends Controller
     public function __construct(SoapWrapper $soapWrapper)
     {
         $this->middleware('auth');
+        $this->middleware('verified');
         $this->soapWrapper = $soapWrapper;
     }
 

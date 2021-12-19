@@ -16,7 +16,7 @@ use \App\Http\Controllers\StockController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Auth::routes();
+Auth::routes(['verify' => true]);
 Route::get('/', [ExchangeController::class, 'index']);
 Route::get('/exchanges/{exchange}/stocks', [StockController::class, "getStocksFromExchange"]);
 Route::get('/exchanges/{exchange}/stocks/{stock}/info', [StockController::class, "getInfo"]);
