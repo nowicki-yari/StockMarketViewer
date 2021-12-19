@@ -14,6 +14,7 @@ class StockController extends Controller
 
     public function __construct(SoapWrapper $soapWrapper)
     {
+        $this->middleware('auth');
         $this->soapWrapper = $soapWrapper;
     }
 

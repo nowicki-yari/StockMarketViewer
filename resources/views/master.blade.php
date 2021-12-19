@@ -20,9 +20,10 @@
             <h3>@yield('subtitle')</h3>
         </div>
         <div class="item2">
-            <h2>Navigation menu</h2>
+            <h3>Navigation menu</h3>
             @yield('input_filter')
-            <h3>User stuff</h3>
+            <hr>
+            @include('user')
             <hr>
             @yield('navigation')
         </div>
