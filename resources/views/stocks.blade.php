@@ -3,7 +3,6 @@
 @stop
 @section('input_filter')
     <input type="text" id="myInput" onkeyup="filter_stocks()" placeholder="Search for names.." title="Type in a name">
-    <hr>
 @stop
 @section('content')
     <div id="stock_list">

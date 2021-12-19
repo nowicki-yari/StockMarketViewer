@@ -15,14 +15,13 @@
 </head>
 <body>
     <div class="grid-container">
-        <div class="item1" onclick="to_home_page()">
-            <h1>Stock viewer</h1>
+        <div class="item1">
+            <h1 onclick="to_home_page()">Stock viewer</h1>
             <h3>@yield('subtitle')</h3>
         </div>
         <div class="item2">
-            <h2>Navigation menu</h2>
             @yield('input_filter')
-            <h3>User stuff</h3>
+            @include('user')
             <hr>
             @yield('navigation')
         </div>
@@ -33,6 +32,17 @@
         </div>
         <div class="item5">
             <h5>Stock viewer</h5>
+            <div style="float: right">
+                <a href="{{ route('logout') }}"
+                   onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                    {{ __('Logout') }}
+                </a>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+            </div>
         </div>
     </div>
 </body>

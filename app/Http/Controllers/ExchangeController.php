@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Exchange;
+use App\Models\Stock;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Artisaninweb\SoapWrapper\SoapWrapper;
+use Illuminate\Support\Facades\Auth;
 
 class ExchangeController extends Controller
 {
@@ -12,6 +15,8 @@ class ExchangeController extends Controller
 
     public function __construct(SoapWrapper $soapWrapper)
     {
+        $this->middleware('auth');
+        $this->middleware('verified');
         $this->soapWrapper = $soapWrapper;
     }
 
@@ -19,14 +24,11 @@ class ExchangeController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function index()
     {
-        /*
-        $allExchanges= Exchange::all();
-        return view("exchange")->with("exchanges",$allExchanges);
-        */
+        $user = Auth::user();
         $soapWrapper = new SoapWrapper();
         $soapWrapper->add('ExchangeList', function ($service) {
            $service
@@ -36,17 +38,32 @@ class ExchangeController extends Controller
                Exchange::class
            ]);
         });
+        $data = ['stocks' => $this->prepare_input_favorites($user)];
+
+        $favorites = $soapWrapper->call('ExchangeList.GetStocks', [
+            $data
+        ]);
 
         $exchanges = $soapWrapper->call('ExchangeList.GetExchanges', [
             new Exchange()
         ]);
-
         $sectors = $soapWrapper->call('ExchangeList.GetListOfSectors', []);
-        $array = json_decode(json_encode($sectors), true);
-        $numeric_indexed_array = array_values($array['GetListOfSectorsResult']);
+        $fav = [];
+        if((array) $favorites != null) {
+            if (gettype($favorites->GetStocksResult->Stock) == 'object') {
+                $fav = [$favorites->GetStocksResult->Stock];
+            } else {
+                $fav = $favorites->GetStocksResult->Stock;
+            }
+        }
+        session()->put('favorites', $fav);
+        session()->put('user', $user);
+
         return view("exchange")
             ->with("exchanges", $exchanges->GetExchangesResult->Exchange)
-            ->with("sectors", $sectors->GetListOfSectorsResult->string);
+            ->with("sectors", $sectors->GetListOfSectorsResult->string)
+            ->with("user", $user)
+            ->with("favorites", $fav);
     }
 
     /**
@@ -130,4 +147,17 @@ class ExchangeController extends Controller
     {
         //
     }
+
+    public function prepare_input_favorites($user): string
+    {
+        return implode(",", array_filter([
+            $user->favorite_1,
+            $user->favorite_2,
+            $user->favorite_3,
+            $user->favorite_4,
+            $user->favorite_5
+        ]));
+    }
 }
+
+

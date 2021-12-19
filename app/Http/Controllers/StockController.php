@@ -14,15 +14,12 @@ class StockController extends Controller
 
     public function __construct(SoapWrapper $soapWrapper)
     {
+        $this->middleware('auth');
         $this->soapWrapper = $soapWrapper;
     }
 
     public function getStocksFromExchange($exchange) {
-        /*
-        $allStocks= Stock::all()
-            ->where('exchange','==', $exchange);
-        return view("stocks")->with("stocks",$allStocks)->with('exchange', $exchange);
-        */
+        [$user, $fav] = $this->retrieve_session_data();
         $data = ['exchange' => $exchange];
         $soapWrapper = new SoapWrapper();
         $soapWrapper->add('StockListFromExchange', function ($service) {
@@ -37,11 +34,16 @@ class StockController extends Controller
         $response = $soapWrapper->call('StockListFromExchange.GetStocksFromExchange', [
             $data
         ]);
-        return view("stocks")->with("stocks",$response->GetStocksFromExchangeResult->Stock)->with('exchange', $exchange);
+        return view("stocks")
+            ->with("stocks",$response->GetStocksFromExchangeResult->Stock)
+            ->with('exchange', $exchange)
+            ->with("favorites", $fav)
+            ->with("user", $user);
     }
 
     public function getStocksFromIndustry($sector, $industry) {
         $data = ['industry' => $industry];
+        [$user, $fav] = $this->retrieve_session_data();
         $soapWrapper = new SoapWrapper();
         $soapWrapper->add('StockListFromIndustry', function ($service) {
             $service
@@ -55,11 +57,33 @@ class StockController extends Controller
         $response = $soapWrapper->call('StockListFromIndustry.GetStocksFromIndustry', [
             $data
         ]);
-        return view("stocks")->with("stocks",$response->GetStocksFromIndustryResult->Stock)->with('industry', $industry);
+        return view("stocks")
+            ->with("stocks",$response->GetStocksFromIndustryResult->Stock)
+            ->with('industry', $industry)
+            ->with("favorites", $fav)
+            ->with("user", $user);
     }
 
     public function getInfo($exchange, $stock) {
+        [$user, $fav] = $this->retrieve_session_data();
         $data = Http::get("http://127.0.0.1:5000/stock/" . $stock . "/info")->json();
-        return view("stock_overview")->with('exchange', $exchange)->with('info', json_decode($data, true));
+        return view("stock_overview")
+            ->with('exchange', $exchange)
+            ->with('info', json_decode($data, true))
+            ->with("favorites", $fav)
+            ->with("user", $user);
+    }
+
+    public function retrieve_session_data(): array
+    {
+        $user = "";
+        $fav = [];
+        if (session()->has('favorites')) {
+            $fav = session('favorites');
+        }
+        if (session()->has('user')) {
+            $user = session('user');
+        }
+        return [$user, $fav];
     }
 }
