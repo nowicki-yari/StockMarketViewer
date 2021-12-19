@@ -23,15 +23,11 @@ class ExchangeController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function index()
     {
         $user = Auth::user();
-        /*
-        $allExchanges= Exchange::all();
-        return view("exchange")->with("exchanges",$allExchanges);
-        */
         $soapWrapper = new SoapWrapper();
         $soapWrapper->add('ExchangeList', function ($service) {
            $service
@@ -59,6 +55,8 @@ class ExchangeController extends Controller
                 $fav = $favorites->GetStocksResult->Stock;
             }
         }
+        session()->put('favorites', $fav);
+        session()->put('user', $user);
 
         return view("exchange")
             ->with("exchanges", $exchanges->GetExchangesResult->Exchange)
@@ -149,7 +147,8 @@ class ExchangeController extends Controller
         //
     }
 
-    public function prepare_input_favorites($user){
+    public function prepare_input_favorites($user): string
+    {
         return implode(",", array_filter([
             $user->favorite_1,
             $user->favorite_2,
