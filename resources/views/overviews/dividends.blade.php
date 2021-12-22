@@ -5,8 +5,9 @@
             .then(data => {
                 let dividends = JSON.parse(data);
                 console.log(dividends);
+
                 if (dividends['Dividends'][0]){
-                    document.getElementById("dividends").innerText = "Last payed out dividends: $" + dividends['Dividends'][0];
+                    document.getElementById("dividends").innerText = "Last payed out dividends (" + dividends['Date'][0].replace("T00:00:00.000Z", "") + "): $" + dividends['Dividends'][0];
                 } else {
                     document.getElementById("dividends").innerText = "No information available"
                 }
@@ -16,9 +17,6 @@
 
 
 </script>
-<div id="dividends">
-    <table id="table">
-
-    </table>
+<div id="dividends" style="margin: 15px; font-size: large;">
 </div>
 

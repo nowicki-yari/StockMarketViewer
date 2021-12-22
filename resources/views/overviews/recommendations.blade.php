@@ -7,10 +7,10 @@
             console.log(recommendations);
             document.getElementById("recommendations").innerText = "The latest analysis is from " +
                 recommendations['Firm'][0] + ": \n\n" +
-                recommendations['To Grade'][0];
-        })
-        .catch(console.error);
+                "Previous grade: " + recommendations['From Grade'][0] + "\n" +
+                "Current grade:  " + recommendations['To Grade'][0];
+        }).catch(console.error);
     });
 </script>
-<div id="recommendations">
+<div id="recommendations" style="margin: 15px; font-size: large;">
 </div>

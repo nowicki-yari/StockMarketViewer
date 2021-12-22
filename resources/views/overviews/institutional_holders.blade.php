@@ -16,6 +16,6 @@
         .catch(console.error);
     });
 </script>
-<div id="institutional_holders">
+<div id="institutional_holders" style="margin: 15px; font-size: large;">
 
 </div>

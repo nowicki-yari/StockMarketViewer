@@ -6,11 +6,11 @@
             let financials = JSON.parse(data);
             console.log(financials);
             document.getElementById("financials").innerText = "" +
-                "Cost of revenue: " + financials["Cost Of Revenue"] + "\n" +
-                "Net Income: " + financials["Net Income"];
+                "Cost of revenue: $" + financials["Cost Of Revenue"] + "\n" +
+                "Net Income:      $" + financials["Net Income"];
         })
         .catch(console.error);
     });
 </script>
-<div id="financials">
+<div id="financials" style="margin: 15px; font-size: large;">
 </div>
