@@ -20,7 +20,6 @@ User will be able to create an account. With this account they will be able to s
 3. News/Twitter API (Python)
 
    This API will be used to receive the latest news about a certain topic/stock.
-4. Login system (Single Sign On?)
 
 
 ## Other info
